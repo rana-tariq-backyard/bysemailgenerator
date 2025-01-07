@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BYS Signature Generator</title>
+  <style>
+    /* General Styles */
+    body{
+      margin: 0;
+    }
+    main {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      /* flex-direction: column; */
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      width: 100%;
+      height: calc(100dvh - 193px);
+    }
+    /* Header Styling */
+    .page-header {
+        width: 100%;
+        background-color: #4b324b;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    .page-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: white;
+    }
+    .page-header p {
+        margin: 5px 0 0;
+        font-size: 1rem;
+    }
+    /* Footer Styling */
+    .page-footer {
+        width: 100%;
+        background-color: #4b324b;
+        color: white;
+        padding: 10px 0px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+    .page-footer a {
+        color: #d1ccd1;
+        text-decoration: none;
+    }
+    .page-footer a:hover {
+        text-decoration: underline;
+    }
+    .signature-wrapper , .form-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+      margin: 20px 0;
+    }
+
+    /* Form Section */
+    .form-container {
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      width: 320px;
+      margin-bottom: 20px;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container form input {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      outline: none;
+    }
+
+    .form-container form input:focus {
+      border-color: #007bff;
+      background-color: #fff;
+    }
+
+    .form-container form button {
+      padding: 10px;
+      font-size: 14px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container form button:hover {
+      background-color: #0056b3;
+    }
+    
+    table {
+      width: 430px;
+      background-color: #d1ccd1;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+      color: #4b324b;
+      line-height: 1.6;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        /* padding: 15px; */
+        text-align: left;
+    }
+
+    .img-column {
+        width: 120px;
+        text-align: center;
+    }
+
+    .text-column {
+        vertical-align: middle;
+        /* padding-left: 10px; */
+    }
+    .text-column p{
+        margin: 6px 0;
+        font-size: 14px;
+    }
+    /* .user-details p:nth-child(2) , .user-details p:nth-child(4) {
+      text-align: right;
+      padding-right: 10px;
+    } */
+
+    .first-row {
+        background-color: #f2f2f2;
+    }
+
+    .first-row .text-column {
+        color: #59495e;
+    }
+
+    .contact-details img {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    .copy-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #4b324b;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .copy-btn:hover {
+        background-color: #59495e;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .form-container, .signature-card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Backyard Symphony Email Signature</h1>
+    <p>Build your perfect signature for emails and beyond</p>
+  </header>
+  <main>
+
+    <div class="form-wrapper">
+      
+      <!-- Page Title -->
+    <h1>Signature Details</h1>
+    
+    <!-- Form Section -->
+    <div class="form-container">
+      <form id="signature-form">
+        <input type="text" id="name_en" name="Name EN" placeholder="Name EN" required>
+        <input type="text" id="name_ar" name="Name AR" placeholder="الاسم عربي" dir="rtl" required>
+        <input type="text" id="job_title_en" name="Job Title EN" placeholder="Job Title EN" required>
+        <input type="text" id="job_title_ar" name="Job Title AR" placeholder="المسمى الوظيفي عربي" dir="rtl" required>
+        <input type="tel" id="phone-1" name="phone-1" placeholder="Phone-1" required>
+        <input type="tel" id="phone-2" name="phone-2" placeholder="Phone-2">
+        <!-- <input type="file" id="image" name="image" accept="image/*"> -->
+        <button type="submit">Generate Signature</button>
+      </form>
+    </div>
+  </div>
+  <div class="signature-wrapper">
+    <!-- Page Title -->
+    <h1>Signature Preview</h1>
+    <!-- Signature Card Section -->
+    <table id="signature-table">
+      <tr class="first-row">
+        <td class="img-column">
+            <img src="https://sustainability-bucket-2.s3.eu-west-1.amazonaws.com/bsp-logo.png" alt="Logo Image" width="100">
+        </td>
+        <td class="text-column user-details">
+            <p><strong id="display-name-en">Rana Tariq Yaqub</strong></p>
+            <p><strong id="display-name-ar">رنا طارق يعقوب</strong></p>
+            <p id="display-job-title-en">Content & experience strategy manager</p>
+            <p id="display-job-title-ar">مدير استراتيجيات المحتوى والتجربة</p>
+          </td>
+      </tr>
+      <tr>
+        <td class="img-column">
+          <img src="https://nca2-bucket.s3.eu-west-1.amazonaws.com/qr_code.png" alt="QR Code" width="100">
+        </td>
+        <td class="text-column contact-details">
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=b7F1F6mHPgxh&format=png&color=000000" alt="Phone Icon" width="18">
+            <span id="display-phone">+966 12345 89767</span>
+          </p>
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=7880&format=png&color=000000" alt="Location Icon" width="18">
+            Jeddah–Riyadh, Kingdom of Saudi Arabia
+          </p>
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=98960&format=png&color=000000" alt="LinkedIn Icon" width="18">
+            <a href="https://www.linkedin.com" target="_blank">LinkedIn: Backyard Symphony</a>
+          </p>
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=1349&format=png&color=000000" alt="Website Icon" width="18">
+            <a href="http://www.backyardex.com" target="_blank">www.backyardex.com</a>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <button class="copy-btn" onclick="copyRenderedTable()">Copy to Clipboard</button>
+  </div>
+</main>
+  <!-- Page Footer -->
+  <footer class="page-footer">
+    <p>© 2025 Backyard Symphony | All Rights Reserved</p>
+    <p>Need help? <a href="mailto:support@backyardex.com">Contact Support</a></p>
+  </footer>
+  
+  <script>
+    document.getElementById("signature-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get the form values
+      const name_en = document.getElementById("name_en").value;
+      const name_ar = document.getElementById("name_ar").value;
+      const job_title_en = document.getElementById("job_title_en").value;
+      const job_title_ar = document.getElementById("job_title_ar").value;
+      const phone_1 = document.getElementById("phone-1").value;
+      const phone_2 = document.getElementById("phone-2").value;
+    //   const imageFile = document.getElementById("image").files[0];
+
+      // Update the signature card with the form values
+      document.getElementById("display-name-en").innerText = name_en;
+      document.getElementById("display-name-ar").innerText = name_ar;
+      document.getElementById("display-job-title-en").innerText = job_title_en;
+      document.getElementById("display-job-title-ar").innerText = job_title_ar;
+      document.getElementById("display-phone").innerText = `${phone_1} , ${phone_2}`;
+
+    // If an image is uploaded, update the user image
+    //   if (imageFile) {
+    //     const reader = new FileReader();
+    //     reader.onload = function (e) {
+    //       document.getElementById("user-image").src = e.target.result;
+    //     };
+    //     reader.readAsDataURL(imageFile);
+    //   }
+
+      // Show the copy button
+      document.getElementById("copy-button").style.display = "inline-block";
+    });
+
+      async function copyRenderedTable() {
+        const table = document.getElementById('signature-table');
+        const range = document.createRange();
+        range.selectNode(table);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        try {
+            const success = document.execCommand('copy');
+            if (success) {
+                alert('Signature copied to clipboard! Paste it into Gmail.');
+            } else {
+                alert('Failed to copy the signature.');
+            }
+        } catch (err) {
+            console.error('Error copying signature:', err);
+            alert('Error copying signature. Please try again.');
+        }
+
+        selection.removeAllRanges();
+      }
+  </script>
+
+</body>
+</html>
