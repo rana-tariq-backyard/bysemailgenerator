@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Professional Signature Generator</title>
+  <title>BYS Signature Generator</title>
   <style>
     /* General Styles */
     body{
@@ -206,8 +206,8 @@
         <input type="text" id="name_ar" name="Name AR" placeholder="الاسم عربي" dir="rtl" required>
         <input type="text" id="job_title_en" name="Job Title EN" placeholder="Job Title EN" required>
         <input type="text" id="job_title_ar" name="Job Title AR" placeholder="المسمى الوظيفي عربي" dir="rtl" required>
-        <input type="number" id="phone-1" name="phone-1" placeholder="Phone-1" required  oninput="validatePhoneNumber(this)" value="966" />
-        <input type="number" id="phone-2" name="phone-2" placeholder="Phone-2" oninput="validatePhoneNumber(this)" value="966" />
+        <input type="tel" id="phone-1" name="phone-1" placeholder="Phone-1" required>
+        <input type="tel" id="phone-2" name="phone-2" placeholder="Phone-2">
         <!-- <input type="file" id="image" name="image" accept="image/*"> -->
         <button type="submit">Generate Signature</button>
       </form>
@@ -225,8 +225,8 @@
         <td class="text-column user-details">
             <p><strong id="display-name-en">Rana Tariq Yaqub</strong></p>
             <p><strong id="display-name-ar">رنا طارق يعقوب</strong></p>
-            <p><strong id="display-job-title-en">Content & experience strategy manager</strong></p>
-            <p><strong id="display-job-title-ar">مدير استراتيجيات المحتوى والتجربة</strong></p>
+            <p id="display-job-title-en">Content & experience strategy manager</p>
+            <p id="display-job-title-ar">مدير استراتيجيات المحتوى والتجربة</p>
           </td>
       </tr>
       <tr>
@@ -236,7 +236,7 @@
         <td class="text-column contact-details">
           <p>
             <img src="https://img.icons8.com/?size=100&id=b7F1F6mHPgxh&format=png&color=000000" alt="Phone Icon" width="18">
-            <span><a href="tel:" id="display-phone-1">+966 12345 89767</a>, <a href="tel:" id="display-phone-2">  </a></span>
+            <span id="display-phone">+966 12345 89767</span>
           </p>
           <p>
             <img src="https://img.icons8.com/?size=100&id=7880&format=png&color=000000" alt="Location Icon" width="18">
@@ -280,10 +280,7 @@
       document.getElementById("display-name-ar").innerText = name_ar;
       document.getElementById("display-job-title-en").innerText = job_title_en;
       document.getElementById("display-job-title-ar").innerText = job_title_ar;
-      document.getElementById("display-phone-1").innerText = `+${phone_1}`;
-      document.getElementById("display-phone-1").href = `tel:+${phone_1}`;
-      document.getElementById("display-phone-2").innerText = `+${phone_2}`;
-      document.getElementById("display-phone-2").href = `tel:+${phone_2}`;
+      document.getElementById("display-phone").innerText = `${phone_1} , ${phone_2}`;
 
     // If an image is uploaded, update the user image
     //   if (imageFile) {
@@ -297,18 +294,7 @@
       // Show the copy button
       document.getElementById("copy-button").style.display = "inline-block";
     });
-    function validatePhoneNumber(input) {
-        // Ensure the input starts with +966 and only allows up to 14 characters
-        const maxLength = 13;
-        if (input.value.length > maxLength) {
-            input.value = input.value.slice(0, maxLength);
-        }
 
-        // Ensure the input starts with +966
-        if (!input.value.startsWith('966')) {
-            input.value = '966' + input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-        }
-    }
       async function copyRenderedTable() {
         const table = document.getElementById('signature-table');
         const range = document.createRange();
