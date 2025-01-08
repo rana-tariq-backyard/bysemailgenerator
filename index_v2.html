@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Professional Signature Generator</title>
-
-  <!-- <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet"> -->
   <style>
     /* General Styles */
     body{
@@ -118,69 +116,53 @@
     }
     
     table {
-        width: 600px;
-        border-collapse: collapse;
-        /* min-height: 138px; */
-        background-color: #f7f7f8;
-        /* font-family: 'IBM Plex Sans Arabic', sans-serif; */
-      }
-      td {
-        padding: 16px;
-        vertical-align: middle;
-        text-align: center;
-      }
-      .img-column {
+      width: 430px;
+      background-color: #d1ccd1;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+      color: #4b324b;
+      line-height: 1.6;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        /* padding: 15px; */
+        text-align: left;
+    }
+
+    .img-column {
         width: 120px;
-      }
-      .text-column {
-        width: 230px;
-        text-align: right;
-      }
-      .contact-column {
-        width: 180px;
-        background-color: #f2f2fc;
-        border-left: 1px solid rgb(202, 200, 200);
-      }
-      .contact-details-text {
-        display: flex;
-        align-items: start;
-        font-family: HT Moshreq Pro;
-        color: #1e0d2d;
-        font-size: 12px;
-        font-weight: 300;
-        /* gap: 8px; */
-        padding: 1px;
-        text-align: start;
-        margin-top: 5px;
-      }
-      .contact-details-text div {
-        color: #1e0d2d;
-        text-decoration: none;
-        font-family: HT Moshreq Pro;
-      }
-      .contact-details-text a:hover {
-        text-decoration: underline;
-        font-family: HT Moshreq Pro;
-      }
-      .user-details {
-        color: #1e0d2d;
-        font-size: 16px;
-        font-weight: 400;
-        font-family: HT Moshreq Pro;
-      }
-      .display-job-title-ar {
-        font-family: IBM Plex Sans Arabic;
-        font-size: 12px;
-        font-weight: 400;
-        color: #7d6a9a;
-      }
-      .display-job-title-en {
-        font-family: HT Moshreq Pro;
-        font-size: 12px;
-        font-weight: 400;
-        color: #7d6a9a;
-      }
-    
+        text-align: center;
+    }
+
+    .text-column {
+        vertical-align: middle;
+        /* padding-left: 10px; */
+    }
+    .text-column p{
+        margin: 6px 0;
+        font-size: 14px;
+    }
+    /* .user-details p:nth-child(2) , .user-details p:nth-child(4) {
+      text-align: right;
+      padding-right: 10px;
+    } */
+
+    .first-row {
+        background-color: #f2f2f2;
+    }
+
+    .first-row .text-column {
+        color: #59495e;
+    }
+
+    .contact-details img {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
     .copy-btn {
         margin-top: 20px;
         padding: 10px 20px;
@@ -225,7 +207,7 @@
         <input type="text" id="job_title_en" name="Job Title EN" placeholder="Job Title EN" required>
         <input type="text" id="job_title_ar" name="Job Title AR" placeholder="المسمى الوظيفي عربي" dir="rtl" required>
         <input type="number" id="phone-1" name="phone-1" placeholder="Phone-1" required  oninput="validatePhoneNumber(this)" value="966" />
-        <!-- <input type="number" id="phone-2" name="phone-2" placeholder="Phone-2" oninput="validatePhoneNumber(this)" value="966" /> -->
+        <input type="number" id="phone-2" name="phone-2" placeholder="Phone-2" oninput="validatePhoneNumber(this)" value="966" />
         <!-- <input type="file" id="image" name="image" accept="image/*"> -->
         <button type="submit">Generate Signature</button>
       </form>
@@ -236,72 +218,40 @@
     <h1>Signature Preview</h1>
     <!-- Signature Card Section -->
     <table id="signature-table">
+      <tr class="first-row">
+        <td class="img-column">
+            <img src="https://sustainability-bucket-2.s3.eu-west-1.amazonaws.com/bsp-logo.png" alt="Logo Image" width="100">
+        </td>
+        <td class="text-column user-details">
+            <p><strong id="display-name-en">Rana Tariq Yaqub</strong></p>
+            <p><strong id="display-name-ar">رنا طارق يعقوب</strong></p>
+            <p><strong id="display-job-title-en">Content & experience strategy manager</strong></p>
+            <p><strong id="display-job-title-ar">مدير استراتيجيات المحتوى والتجربة</strong></p>
+          </td>
+      </tr>
       <tr>
         <td class="img-column">
-          <img
-            src="https://sustainability-bucket-2.s3.eu-west-1.amazonaws.com/bacyard_logo.png"
-            alt="Logo img"
-            width="118"
-            height="44"
-          />
+          <img src="https://nca2-bucket.s3.eu-west-1.amazonaws.com/qr_code.png" alt="QR Code" width="100">
         </td>
-        <td class="text-column">
-          <div>
-            <div id="display-name-ar" class="user-details">عبدالرحمن بن صائم الدهر</div>
-            <div id="display-name-en" class="user-details">Abdulrahman Saim Aldaher</div>
-          </div>
-          <div style="margin-top: 8px;">
-            <div id="display-job-title-ar" class="display-job-title-ar">
-              مدير استراتيجية المحتوى والتجربة
-            </div>
-            <div id="display-job-title-en" class="display-job-title-en">
-              Content & Experience Strategy Manager
-            </div>
-          </div>
-        </td>
-        <td class="contact-column" colspan="2">
-          <div class="contact-details-text">
-            <img
-              src="https://img.icons8.com/?size=100&id=b7F1F6mHPgxh&format=png&color=000000"
-              alt="Phone Icon"
-              width="14"
-              height="14px"
-            />
-            <span style="margin-left: 8px;"><a href="tel:" id="display-phone-1">+966 12345 89767</a></span>
-          </div>
-
-          <div class="contact-details-text">
-            <img
-              src="https://img.icons8.com/?size=100&id=98960&format=png&color=000000"
-              alt="LinkedIn Icon"
-              width="14"
-              height="14px"
-            />
-            <span style="margin-left: 8px;">Backyard Symphony</span>
-          </div>
-          <div class="contact-details-text">
-            <img
-              src="https://img.icons8.com/?size=100&id=1349&format=png&color=000000"
-              alt="Website Icon"
-              width="14"
-              height="14px"
-            />
-            <span style="margin-left: 8px;">www.backyardex.com</span>
-          </div>
-          <div class="contact-details-text">
-            <img
-              src="https://img.icons8.com/?size=100&id=7880&format=png&color=000000"
-              alt="Location Icon"
-              width="14"
-              height="14px"
-            />
-            <span style="margin-left: 5px;">Jeddah–Riyadh, Kingdom of Saudi Arabia</span>
-          </div>
+        <td class="text-column contact-details">
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=b7F1F6mHPgxh&format=png&color=000000" alt="Phone Icon" width="18">
+            <span><a href="tel:" id="display-phone-1">+966 12345 89767</a>, <a href="tel:" id="display-phone-2">  </a></span>
+          </p>
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=7880&format=png&color=000000" alt="Location Icon" width="18">
+            Jeddah–Riyadh, Kingdom of Saudi Arabia
+          </p>
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=98960&format=png&color=000000" alt="LinkedIn Icon" width="18">
+            <a href="https://www.linkedin.com" target="_blank">LinkedIn: Backyard Symphony</a>
+          </p>
+          <p>
+            <img src="https://img.icons8.com/?size=100&id=1349&format=png&color=000000" alt="Website Icon" width="18">
+            <a href="http://www.backyardex.com" target="_blank">www.backyardex.com</a>
+          </p>
         </td>
       </tr>
-      <!-- <tr> -->
-
-      <!-- </tr> -->
     </table>
     <button class="copy-btn" onclick="copyRenderedTable()">Copy to Clipboard</button>
   </div>
@@ -322,7 +272,7 @@
       const job_title_en = document.getElementById("job_title_en").value;
       const job_title_ar = document.getElementById("job_title_ar").value;
       const phone_1 = document.getElementById("phone-1").value;
-      // const phone_2 = document.getElementById("phone-2").value;
+      const phone_2 = document.getElementById("phone-2").value;
     //   const imageFile = document.getElementById("image").files[0];
 
       // Update the signature card with the form values
@@ -332,8 +282,8 @@
       document.getElementById("display-job-title-ar").innerText = job_title_ar;
       document.getElementById("display-phone-1").innerText = `+${phone_1}`;
       document.getElementById("display-phone-1").href = `tel:+${phone_1}`;
-      // document.getElementById("display-phone-2").innerText = `+${phone_2}`;
-      // document.getElementById("display-phone-2").href = `tel:+${phone_2}`;
+      document.getElementById("display-phone-2").innerText = `+${phone_2}`;
+      document.getElementById("display-phone-2").href = `tel:+${phone_2}`;
 
     // If an image is uploaded, update the user image
     //   if (imageFile) {
