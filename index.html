@@ -213,6 +213,24 @@
   <main>
 
     <div class="form-wrapper">
+      <!-- Page Title -->
+      <h1>Instructions</h1>
+
+      <!-- Form Section -->
+      <div class="form-container">
+        <p>Copy to Clipboard is disabled intially so:</p>
+        <ol>
+          <li>Enter your full name in both English and Arabic.</li>
+          <li>Provide your job title in both languages.</li>
+          <li>Add your phone number (starting with the country code, e.g., 966).</li>
+          <li>Click "Generate Signature" to see a preview.</li>
+          <li>Use the "Copy to Clipboard" button to copy the signature.</li>
+        </ol>
+        <span>Once copied, paste the signature into your email client settings.</span>
+      </div>
+  </div>
+
+    <div class="form-wrapper">
       
       <!-- Page Title -->
     <h1>Signature Details</h1>
@@ -239,9 +257,9 @@
       <tr>
         <td class="img-column">
           <img
-            src="https://sustainability-bucket-2.s3.eu-west-1.amazonaws.com/bacyard_logo.png"
+          src="https://sustainability-bucket-2.s3.eu-west-1.amazonaws.com/backyard_logo.png"
             alt="Logo img"
-            width="118"
+            width="126"
             height="44"
           />
         </td>
@@ -267,7 +285,7 @@
               width="14"
               height="14px"
             />
-            <span style="margin-left: 8px;"><a href="tel:" id="display-phone-1">+966 12345 89767</a></span>
+            <span style="margin-left: 8px;"><a style="color: black;" href="tel:" id="display-phone-1">+966 12345 89767</a></span>
           </div>
 
           <div class="contact-details-text">
@@ -277,7 +295,7 @@
               width="14"
               height="14px"
             />
-            <span style="margin-left: 8px;"><a href="https://www.linkedin.com/company/backyard-symphony/"> Backyard Symphony</a></span>
+            <span style="margin-left: 8px;"><a style="color: black;" href="https://www.linkedin.com/company/backyard-symphony/"> Backyard Symphony</a></span>
           </div>
           <div class="contact-details-text">
             <img
@@ -286,7 +304,7 @@
               width="14"
               height="14px"
             />
-            <span style="margin-left: 8px;"><a href="https://www.backyard.sa">www.backyardex.sa</a></span>
+            <span style="margin-left: 8px;"><a style="color: black;" href="https://www.backyard.sa">www.backyardex.sa</a></span>
           </div>
           <div class="contact-details-text">
             <img
@@ -295,7 +313,11 @@
               width="14"
               height="14px"
             />
-            <span style="margin-left: 5px;">Jeddah–Riyadh, Kingdom of Saudi Arabia</span>
+            <span style="margin-left: 5px;">Jeddah–Riyadh</span>
+            
+          </div>
+          <div class="contact-details-text">
+            <span style="margin-left: 20px;">Kingdom of Saudi Arabia</span>
           </div>
         </td>
       </tr>
@@ -303,16 +325,20 @@
 
       <!-- </tr> -->
     </table>
-    <button class="copy-btn" onclick="copyRenderedTable()">Copy to Clipboard</button>
+    <button class="copy-btn" id="copy-btn" onclick="copyRenderedTable()" disabled>Copy to Clipboard</button>
   </div>
 </main>
   <!-- Page Footer -->
   <footer class="page-footer">
-    <p>© 2025 Backyard Symphony | All Rights Reserved</p>
+    <p>© <span id="current-year"></span> Backyard Symphony | All Rights Reserved</p>
     <p>Need help? <a href="mailto:support@backyardex.com">Contact Support</a></p>
   </footer>
   
   <script>
+
+    // Set Current Year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
     document.getElementById("signature-form").addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -322,8 +348,6 @@
       const job_title_en = document.getElementById("job_title_en").value;
       const job_title_ar = document.getElementById("job_title_ar").value;
       const phone_1 = document.getElementById("phone-1").value;
-      // const phone_2 = document.getElementById("phone-2").value;
-    //   const imageFile = document.getElementById("image").files[0];
 
       // Update the signature card with the form values
       document.getElementById("display-name-en").innerText = name_en;
@@ -332,21 +356,15 @@
       document.getElementById("display-job-title-ar").innerText = job_title_ar;
       document.getElementById("display-phone-1").innerText = `+${phone_1}`;
       document.getElementById("display-phone-1").href = `tel:+${phone_1}`;
-      // document.getElementById("display-phone-2").innerText = `+${phone_2}`;
-      // document.getElementById("display-phone-2").href = `tel:+${phone_2}`;
-
-    // If an image is uploaded, update the user image
-    //   if (imageFile) {
-    //     const reader = new FileReader();
-    //     reader.onload = function (e) {
-    //       document.getElementById("user-image").src = e.target.result;
-    //     };
-    //     reader.readAsDataURL(imageFile);
-    //   }
 
       // Show the copy button
-      document.getElementById("copy-button").style.display = "inline-block";
+      const copyButton = document.getElementById('copy-btn');
+      copyButton.disabled = false;
+      copyButton.classList.add('active');
+      alert('Form submitted! Copy button is now enabled.');
+      // document.getElementById("copy-button").style.display = "inline-block";
     });
+
     function validatePhoneNumber(input) {
         // Ensure the input starts with +966 and only allows up to 14 characters
         const maxLength = 13;
@@ -359,29 +377,30 @@
             input.value = '966' + input.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
         }
     }
-      async function copyRenderedTable() {
-        const table = document.getElementById('signature-table');
-        const range = document.createRange();
-        range.selectNode(table);
 
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
+    async function copyRenderedTable() {
+      const table = document.getElementById('signature-table');
+      const range = document.createRange();
+      range.selectNode(table);
 
-        try {
-            const success = document.execCommand('copy');
-            if (success) {
-                alert('Signature copied to clipboard! Paste it into Gmail.');
-            } else {
-                alert('Failed to copy the signature.');
-            }
-        } catch (err) {
-            console.error('Error copying signature:', err);
-            alert('Error copying signature. Please try again.');
-        }
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
 
-        selection.removeAllRanges();
+      try {
+          const success = document.execCommand('copy');
+          if (success) {
+              alert('Signature copied to clipboard! Paste it into Gmail.');
+          } else {
+              alert('Failed to copy the signature.');
+          }
+      } catch (err) {
+          console.error('Error copying signature:', err);
+          alert('Error copying signature. Please try again.');
       }
+
+      selection.removeAllRanges();
+    }
   </script>
 
 </body>
